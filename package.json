@@ -1,0 +1,24 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./src/output.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanzholahs/betanzol-website.git"
+  },
+  "author": "Hanzholah Shobri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hanzholahs/betanzol-website/issues"
+  },
+  "homepage": "https://github.com/hanzholahs/betanzol-website#readme",
+  "dependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
