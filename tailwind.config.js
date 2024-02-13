@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        cursive: ["Pinyon Script", "Dancing Script"]
+        cursive: ["Pinyon Script", "Dancing Script"],
+        kufi: ["Reem Kufi", "sans-serif"]
       }
     },
   },
