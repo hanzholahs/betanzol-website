@@ -30,11 +30,7 @@ function render_audience() {
     }
 }
 
-async function update_wishes() {
-    container = document.getElementById('wishes-container')
-    container.innerHTML = ''
-
-
+async function update_wishes() {    
     let { data: Wedding_Guest, error } = await supabaseClient
         .from('Wedding_Guest')
         .select('*')
