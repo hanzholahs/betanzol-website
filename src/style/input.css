@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+@layer components {
+    .pattern-polka {
+        background-color: #fff8be;
+        opacity: 1;
+        background-image: radial-gradient(#1f1400 0.95px, #fff8be 0.9500000000000001px);
+        background-size: 19px 19px;
+    }
+}
