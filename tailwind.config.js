@@ -20,10 +20,10 @@ module.exports = {
       keyframes: {
           'wiggle': {
               '0%, 100%': {
-                  transform: 'rotate(-2deg) scale(105%)'
+                  transform: 'rotate(-2deg)'
               },
               '50%': {
-                  transform: 'rotate(2deg) scale(100%)'
+                  transform: 'rotate(2deg)'
               },
           },
       }
