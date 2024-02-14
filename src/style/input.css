@@ -3,8 +3,20 @@
 @tailwind utilities;
 
 
+@layer base {
+    section {
+        @apply py-16;
+        @apply px-5;
+    }
+}
+
 
 @layer components {
+    .contain-text {
+        @apply bg-back;
+        @apply p-[2px]
+    }
+
     .pattern-polka {
         background-color: #fff8be;
         opacity: 1;
