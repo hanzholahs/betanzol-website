@@ -23,4 +23,48 @@
         background-image: radial-gradient(#1f1400 0.95px, #fff8be 0.9500000000000001px);
         background-size: 19px 19px;
     }
+
+    .wish-card-outer {
+        @apply w-4/5;
+        @apply sm:w-2/3;
+        @apply shrink-0;
+        @apply max-w-sm;
+        @apply p-6;
+        @apply border;
+        @apply border-primary;
+        @apply rounded-lg;
+        @apply shadow;
+        @apply shadow-yellow-100;
+        @apply bg-primary-lighter;
+    }
+
+    .wish-card-inner {
+        @apply w-full;
+        @apply h-full;
+        @apply overflow-auto;
+    }
+
+    .wish-card-header {
+        @apply mb-1;
+        @apply md:text-lg;
+        @apply font-semibold;
+        @apply tracking-tight;
+        @apply text-yellow-500;
+    }
+
+    .wish-card-date {
+        @apply mb-3;
+        @apply text-back;
+        @apply opacity-50;
+        @apply text-xs;
+        @apply md:text-sm;
+        @apply border-b;
+    }
+
+    .wish-card-content {
+        @apply font-normal;
+        @apply text-sm;
+        @apply md:text-base;
+        @apply text-yellow-100;
+    }
 }

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/hanzholahs/betanzol-website#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^2.39.6",
     "tailwindcss": "^3.4.1"
   }
 }
