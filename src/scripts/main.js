@@ -3,12 +3,32 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
 
 update_wishes()
+render_audience()
 
 const form = document.getElementById('rsvp-form')
 form.addEventListener("submit", (event) => {
     event.preventDefault()
     submit_form()
 })
+
+function render_audience() {
+    getParams = window.location.search
+
+    if (getParams.length == 0) return
+    
+    audience = getParams.split('&')
+        .map((s) => {return s.split('=')})
+        .filter((s) => {return s[0].replace('?', '') == 'to'})
+
+    if (audience) {
+        audience = audience[0][1].replace(/[^a-zA-Z\d]/g, ' ')
+    }
+
+    if (audience) {
+        audience_tag = document.getElementById('audience')
+        audience_tag.innerHTML = audience
+    }
+}
 
 async function update_wishes() {
     container = document.getElementById('wishes-container')
@@ -25,10 +45,7 @@ async function update_wishes() {
         console.log(error)
     }
 
-    console.log(Wedding_Guest)
-
     if (Wedding_Guest) {
-        console.log(Wedding_Guest)
         container = document.getElementById('wishes-container')
         for (row of Wedding_Guest) {
             container.appendChild(create_wish_card(row))
@@ -65,8 +82,6 @@ function create_wish_card(row) {
     card_outer = document.createElement('div')
     card_outer.setAttribute('class', 'wish-card-outer')
     card_outer.appendChild(card_inner)
-
-    console.log(card_outer)
 
     return card_outer
 }
