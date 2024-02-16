@@ -41,7 +41,7 @@
     .wish-card-inner {
         @apply w-full;
         @apply h-full;
-        @apply overflow-auto;
+        @apply overflow-y-scroll;
     }
 
     .wish-card-header {

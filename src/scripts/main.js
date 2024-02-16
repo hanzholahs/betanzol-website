@@ -2,8 +2,15 @@ const supabaseUrl = 'https://dnkvpzncrkjookybqmla.supabase.co'
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRua3Zwem5jcmtqb29reWJxbWxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc5MjA0MzIsImV4cCI6MjAyMzQ5NjQzMn0.NQaWWdKqsMnLkKgbXQkqJDqwfP3F8sdOJCQ5E7BjKf0'
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
 
+const dday = new Date('2024-03-02T11:00:00').getTime()
+const tday = new Date().getTime()
+var time_difference = dday - tday
+var time_counter = 0
+
 update_wishes()
 render_audience()
+render_countdown()
+setInterval(render_countdown, 1000)
 
 const form = document.getElementById('rsvp-form')
 form.addEventListener("submit", (event) => {
@@ -88,9 +95,11 @@ function submit_form() {
     confirmation = document.getElementById('rsvp-confirmation').value
     wish = document.getElementById('rsvp-wish').value
 
+    row = {fullname: fullname, phone: phone, confirmation: confirmation, wish: wish}
+
     if (!fullname || !phone || !confirmation || !wish) {
         console.error('Form is not complete.')
-        console.log({fullname: fullname, phone: phone, confirmation: confirmation, wish: wish})
+        console.log(row)
         return
     }
 
@@ -99,13 +108,6 @@ function submit_form() {
     else if (confirmation == "2 Orang") { confirmation = 2 }
     else { confirmation = -1 }
     
-    row = {
-        fullname: fullname,
-        phone: phone,
-        confirmation: confirmation,
-        wish: wish
-    }
-
     insert_data(row)
 }
 
@@ -113,10 +115,35 @@ async function insert_data(row) {
     const { data, error } = await supabaseClient
         .from('Wedding_Guest')
         .insert(row)
-        .select()
 
     if (error) {
         console.error('Could not insert the data.')
         console.log(error)
     }
 }
+
+function format_time(time) {
+    d = Math.floor(time / (1000 * 60 * 60 * 24))
+    h = Math.floor(time % (1000 * 60 * 60 * 24) / (1000 * 60 * 60))
+    m = Math.floor(time % (1000 * 60 * 60) / (1000 * 60))
+    s = Math.floor(time % (1000 * 60) / 1000)
+
+    return  [d, h, m, s]
+}
+
+function render_countdown() {
+    time_counter = time_counter + 1
+    
+    count = format_time(time_difference - time_counter * 1000)
+    count = count.map((val) => val <= 9 ? '0' + val : val)
+
+    el_d = document.getElementById('counter-d')
+    el_d.innerHTML = count[0]
+    el_h = document.getElementById('counter-h')
+    el_h.innerHTML = count[1]
+    el_m = document.getElementById('counter-m')
+    el_m.innerHTML = count[2]
+    el_s = document.getElementById('counter-s')
+    el_s.innerHTML = count[3]
+}
+

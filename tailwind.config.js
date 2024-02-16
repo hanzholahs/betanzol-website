@@ -15,17 +15,26 @@ module.exports = {
         back: '#fff8be'
       },
       animation: {
-        'wiggle': 'wiggle 1s ease-in-out infinite'
+        'wiggle': 'wiggle 1s ease-in-out infinite',
+        'zoom': 'zoom 1s ease-in-out infinite'
       },
       keyframes: {
-          'wiggle': {
-              '0%, 100%': {
-                  transform: 'rotate(-2deg)'
-              },
-              '50%': {
-                  transform: 'rotate(2deg)'
-              },
-          },
+        'wiggle': {
+            '0%, 100%': {
+                transform: 'rotate(-2deg)'
+            },
+            '50%': {
+                transform: 'rotate(2deg)'
+            },
+        },
+        'zoom': {
+            '0%, 100%': {
+                transform: 'scale(105%)'
+            },
+            '50%': {
+                transform: 'scale(100%))'
+            },
+        },
       }
     },
   },
