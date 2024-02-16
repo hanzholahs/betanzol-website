@@ -945,6 +945,20 @@ section {
   animation: zoom 1s ease-in-out infinite;
 }
 
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-2deg);
+  }
+
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+.animate-wiggle {
+  animation: wiggle 1s ease-in-out infinite;
+}
+
 .appearance-none {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -1148,6 +1162,11 @@ section {
   line-height: 1rem;
 }
 
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -1239,6 +1258,11 @@ section {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.invalid\:border-pink-600:invalid {
+  --tw-border-opacity: 1;
+  border-color: rgb(219 39 119 / var(--tw-border-opacity));
+}
+
 .hover\:bg-primary-lighter:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(127 83 0 / var(--tw-bg-opacity));
@@ -1293,6 +1317,11 @@ section {
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.invalid\:focus\:border-pink-600:focus:invalid {
+  --tw-border-opacity: 1;
+  border-color: rgb(219 39 119 / var(--tw-border-opacity));
 }
 
 .group:hover .group-hover\:-rotate-2 {
@@ -1661,6 +1690,11 @@ section {
   .lg\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .lg\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .lg\:blur-sm {

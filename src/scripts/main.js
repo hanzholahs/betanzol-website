@@ -12,11 +12,15 @@ render_audience()
 render_countdown()
 setInterval(render_countdown, 1000)
 
-const form = document.getElementById('rsvp-form')
-form.addEventListener("submit", (event) => {
+const rsvp_form = document.getElementById('rsvp-form')
+rsvp_form.addEventListener("submit", (event) => {
     event.preventDefault()
     submit_form()
 })
+
+const rsvp_thank = document.getElementById('rsvp-thank-note')
+
+
 
 function render_audience() {
     getParams = window.location.search
@@ -37,7 +41,7 @@ function render_audience() {
     }
 }
 
-async function update_wishes() {    
+async function update_wishes() {
     let { data: Wedding_Guest, error } = await supabaseClient
         .from('Wedding_Guest')
         .select('*')
@@ -89,13 +93,11 @@ function create_wish_card(row) {
     return card_outer
 }
 
-function submit_form() {
+async function submit_form() {
     fullname = document.getElementById('rsvp-fullname').value
-    phone = document.getElementById('rsvp-phone').value
+    phone = 0 //document.getElementById('rsvp-phone').value
     confirmation = document.getElementById('rsvp-confirmation').value
     wish = document.getElementById('rsvp-wish').value
-
-    row = {fullname: fullname, phone: phone, confirmation: confirmation, wish: wish}
 
     if (!fullname || !phone || !confirmation || !wish) {
         console.error('Form is not complete.')
@@ -107,11 +109,18 @@ function submit_form() {
     else if (confirmation == "1 Orang") { confirmation = 1 }
     else if (confirmation == "2 Orang") { confirmation = 2 }
     else { confirmation = -1 }
+
+    row = {fullname: fullname, phone: phone, confirmation: confirmation, wish: wish}
+
     
     insert_data(row)
+    rsvp_form.setAttribute('style', 'display: none;')
+    rsvp_thank.setAttribute('style', 'display: block;')
 }
 
 async function insert_data(row) {
+    console.log(row)
+
     const { data, error } = await supabaseClient
         .from('Wedding_Guest')
         .insert(row)
@@ -133,7 +142,7 @@ function format_time(time) {
 
 function render_countdown() {
     time_counter = time_counter + 1
-    
+
     count = format_time(time_difference - time_counter * 1000)
     count = count.map((val) => val <= 9 ? '0' + val : val)
 
