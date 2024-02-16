@@ -95,9 +95,11 @@ function create_wish_card(row) {
 
 async function submit_form() {
     fullname = document.getElementById('rsvp-fullname').value
-    phone = 0 //document.getElementById('rsvp-phone').value
+    phone = 111 //document.getElementById('rsvp-phone').value
     confirmation = document.getElementById('rsvp-confirmation').value
     wish = document.getElementById('rsvp-wish').value
+
+    row = {fullname: fullname, phone: phone, confirmation: confirmation, wish: wish}
 
     if (!fullname || !phone || !confirmation || !wish) {
         console.error('Form is not complete.')
@@ -105,12 +107,11 @@ async function submit_form() {
         return
     }
 
-    if (confirmation == "Tidak Hadir") { confirmation = 0 }
-    else if (confirmation == "1 Orang") { confirmation = 1 }
-    else if (confirmation == "2 Orang") { confirmation = 2 }
-    else { confirmation = -1 }
+    if (confirmation == "Tidak Hadir") { row.confirmation = 0 }
+    else if (confirmation == "1 Orang") { row.confirmation = 1 }
+    else if (confirmation == "2 Orang") { row.confirmation = 2 }
+    else { row.confirmation = -1 }
 
-    row = {fullname: fullname, phone: phone, confirmation: confirmation, wish: wish}
 
     
     insert_data(row)
