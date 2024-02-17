@@ -35,6 +35,8 @@ function render_audience() {
         audience = audience[0][1].replace(/[^a-zA-Z\d]/g, ' ')
     }
 
+    if (audience.toLowerCase() == 'all') return
+
     if (audience) {
         audience_tag = document.getElementById('audience')
         audience_tag.innerHTML = audience
@@ -55,6 +57,7 @@ async function update_wishes() {
     if (Wedding_Guest) {
         container = document.getElementById('wishes-container')
         for (row of Wedding_Guest) {
+            if (row.wish == '') continue
             container.appendChild(create_wish_card(row))
         }
     }
@@ -66,7 +69,11 @@ function create_wish_card(row) {
     wish = row.wish
 
     date = new Date(date)
-    date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + '.' + date.getMinutes()
+    date = date.getFullYear() + '-' +
+           ('0' + date.getMonth()).slice(-2) + '-' +
+           ('0' + date.getDate()).slice(-2)  + ' ' +
+           ('0' + date.getHours()).slice(-2) + ':' +
+           ('0' + date.getMinutes()).slice(-2)
 
     card_header = document.createElement('h5')
     card_header.innerHTML = header
@@ -101,7 +108,8 @@ async function submit_form() {
 
     row = {fullname: fullname, phone: phone, confirmation: confirmation, wish: wish}
 
-    if (!fullname || !phone || !confirmation || !wish) {
+    if (!fullname || !confirmation) {
+        window.alert('Data untuk Nama dan Kehadiran tidak boleh kosong.')
         console.error('Form is not complete.')
         console.log(row)
         return
